@@ -1,0 +1,76 @@
+<mxfile host="65bd71144e">
+    <diagram id="sniQ5AtO-P1mudK7dxSz" name="main">
+        <mxGraphModel dx="596" dy="650" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="none" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="76" value="消息线程" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="290" y="480" width="120" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="77" value="节目单线程" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="280" y="250" width="120" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="78" value="频道线程" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="280" y="360" width="120" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="2kY64bB2j5rrbZhn32bx-78" value="main" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="280" y="20" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="2kY64bB2j5rrbZhn32bx-79" value="媒体库" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="280" y="130" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="kX3MCS0K4-PeR_7Zibnm-79" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="kX3MCS0K4-PeR_7Zibnm-78" target="2kY64bB2j5rrbZhn32bx-79">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="kX3MCS0K4-PeR_7Zibnm-78" value="先从媒体库中获取媒体数据，&lt;div&gt;内容+数量&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="80" y="140" width="180" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="kX3MCS0K4-PeR_7Zibnm-80" value="将获取的媒体库数据（内容+数量）&lt;div&gt;传给节目单线程&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="65" y="250" width="210" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="kX3MCS0K4-PeR_7Zibnm-81" value="根据获取数量创建相应的n个频道线程" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="40" y="360" width="220" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="kX3MCS0K4-PeR_7Zibnm-82" value="最后才创建消息线程，使用socket 通信" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="20" y="478" width="230" height="30" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+    <diagram id="PoKpmcFk1H6phPo-jwLa" name="thr_msgcntl">
+        <mxGraphModel dx="715" dy="780" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="9l3JoYngRvh0Jd3_UCmr-1" value="消息线程" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="100" y="150" width="120" height="60" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+    <diagram id="_B99x2PyViBlCt-gA24M" name="thr_list">
+        <mxGraphModel dx="715" dy="780" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="R3D3ateZzQPgHFfZyDml-1" value="节目单线程" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="80" y="130" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="kL6ILA-OuGcA11_34-Yg-3" value="thr_list_create" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="290" y="50" width="190" height="40" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+    <diagram id="XtY-fO6--vy7Owh5FpWg" name="thr_channel">
+        <mxGraphModel dx="715" dy="780" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="IIaKj1g6RGypwZwQjYH2-1" value="频道线程" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="80" y="160" width="120" height="60" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
