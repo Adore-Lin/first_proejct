@@ -11,9 +11,9 @@ void EXTIX_Init(void)
 	
 	KEY_Init();
 	
-//¿ªÆôAFIOÊ±ÖÓ	
+//å¼€å¯AFIOæ—¶é’Ÿ	
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
-//ÉèÖÃIO¿ÚÓëÖĞ¶ÏÏßµÄÓ³Éä¹ØÏµ¡¢ÖĞ¶Ï³õÊ¼»¯¡¢ÏÂ½µÑØ´¥·¢
+//è®¾ç½®IOå£ä¸ä¸­æ–­çº¿çš„æ˜ å°„å…³ç³»ã€ä¸­æ–­åˆå§‹åŒ–ã€ä¸‹é™æ²¿è§¦å‘
 	
 	GPIO_EXTILineConfig(GPIO_PortSourceGPIOE, GPIO_PinSource3);//KEY1
 
@@ -27,7 +27,7 @@ void EXTIX_Init(void)
 	Exti_InitStructure.EXTI_Line  	= EXTI_Line4;
 	EXTI_Init(&Exti_InitStructure);
 	
-//ÅäÖÃÖĞ¶Ï·Ö×éNVIC	
+//é…ç½®ä¸­æ–­åˆ†ç»„NVIC	
 	NVIC_InitStructure.NVIC_IRQChannel  = EXTI3_IRQn; //KEY1
 	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0x02;
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x03;
@@ -42,28 +42,28 @@ void EXTIX_Init(void)
 	
 }
 
-//Íâ²¿ÖĞ¶Ï3£¬¸ºÔğ KEY1 °´¼ü¼ì²â£¬¿ØÖÆLED1
+//å¤–éƒ¨ä¸­æ–­3ï¼Œè´Ÿè´£ KEY1 æŒ‰é”®æ£€æµ‹ï¼Œæ§åˆ¶LED1
 void EXTI3_IRQHandler(void)
 {
-	delay_ms(10);//Ïû¶¶
+	delay_ms(10);//æ¶ˆæŠ–
 	
 	if(KEY1 == 0)
 	{
 		LED1 = !LED1;
 	}
 	
-	EXTI_ClearITPendingBit(EXTI_Line3);//Çå³ı LINE3 ÉÏµÄÖĞ¶Ï±êÖ¾Î»
+	EXTI_ClearITPendingBit(EXTI_Line3);//æ¸…é™¤ LINE3 ä¸Šçš„ä¸­æ–­æ ‡å¿—ä½
 }
 
-//Íâ²¿ÖĞ¶Ï4£¬¸ºÔğ KEY0 °´¼ü¼ì²â£¬¿ØÖÆLED0
+//å¤–éƒ¨ä¸­æ–­4ï¼Œè´Ÿè´£ KEY0 æŒ‰é”®æ£€æµ‹ï¼Œæ§åˆ¶LED0
 void EXTI4_IRQHandler(void)
 {
-	delay_ms(10);//Ïû¶¶
+	delay_ms(10);//æ¶ˆæŠ–
 	
 	if(KEY0 == 0)
 	{
 		LED0 =  !LED0;
 	}
 	
-	EXTI_ClearITPendingBit(EXTI_Line4);//Çå³ı LINE3 ÉÏµÄÖĞ¶Ï±êÖ¾Î»
+	EXTI_ClearITPendingBit(EXTI_Line4);//æ¸…é™¤ LINE3 ä¸Šçš„ä¸­æ–­æ ‡å¿—ä½
 } 

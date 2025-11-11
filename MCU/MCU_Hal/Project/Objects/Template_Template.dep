@@ -1,0 +1,235 @@
+Dependencies for Project 'Template', Target 'Template': (DO NOT MODIFY !)
+CompilerVersion: 5060960::V5.06 update 7 (build 960)::.\ARMCC
+F (..\Main\main.c)(0x682B4DF1)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Core -I ..\Main -I ..\Driver -I ..\SDK\CMSIS\Include -I ..\SDK\CMSIS\Device\ST\STM32F1xx\Include -I ..\SDK\STM32F1xx_HAL_Driver\Src -I ..\SDK\STM32F1xx_HAL_Driver\Inc-I"D:\Program Files\Keil_v5\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\Program Files\Keil_v5\ARM\CMSIS\Include"-D__UVISION_VERSION="532" -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+I (..\Main\main.h)(0x5FA37036)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal.h)(0x5ED127E8)
+I (..\Core\stm32f1xx_hal_conf.h)(0x5FA3622E)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_rcc.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_def.h)(0x5ED127E8)
+I (..\SDK\CMSIS\Device\ST\STM32F1xx\Include\stm32f1xx.h)(0x5ED127E4)
+I (..\SDK\CMSIS\Device\ST\STM32F1xx\Include\stm32f103xe.h)(0x5ED127E4)
+I (..\SDK\CMSIS\Include\core_cm3.h)(0x5ED127E8)
+I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5F63877C)
+I (..\SDK\CMSIS\Include\cmsis_version.h)(0x5ED127E8)
+I (..\SDK\CMSIS\Include\cmsis_compiler.h)(0x5ED127E8)
+I (..\SDK\CMSIS\Include\cmsis_armcc.h)(0x5ED127E8)
+I (..\SDK\CMSIS\Device\ST\STM32F1xx\Include\system_stm32f1xx.h)(0x5ED127E4)
+I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5F63877C)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_rcc_ex.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_gpio.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_gpio_ex.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_cortex.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_flash.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_flash_ex.h)(0x5ED127E8)
+I (..\Core\stm32f1xx_clk.h)(0x5FAB82E8)
+I (..\Driver\driver_led.h)(0x67756055)
+I (..\Driver\driver_key.h)(0x6775624E)
+F (..\Driver\driver_led.c)(0x6775620B)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Core -I ..\Main -I ..\Driver -I ..\SDK\CMSIS\Include -I ..\SDK\CMSIS\Device\ST\STM32F1xx\Include -I ..\SDK\STM32F1xx_HAL_Driver\Src -I ..\SDK\STM32F1xx_HAL_Driver\Inc-I"D:\Program Files\Keil_v5\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\Program Files\Keil_v5\ARM\CMSIS\Include"-D__UVISION_VERSION="532" -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o .\objects\driver_led.o --omf_browse .\objects\driver_led.crf --depend .\objects\driver_led.d)
+I (..\Driver\driver_led.h)(0x67756055)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal.h)(0x5ED127E8)
+I (..\Core\stm32f1xx_hal_conf.h)(0x5FA3622E)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_rcc.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_def.h)(0x5ED127E8)
+I (..\SDK\CMSIS\Device\ST\STM32F1xx\Include\stm32f1xx.h)(0x5ED127E4)
+I (..\SDK\CMSIS\Device\ST\STM32F1xx\Include\stm32f103xe.h)(0x5ED127E4)
+I (..\SDK\CMSIS\Include\core_cm3.h)(0x5ED127E8)
+I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5F63877C)
+I (..\SDK\CMSIS\Include\cmsis_version.h)(0x5ED127E8)
+I (..\SDK\CMSIS\Include\cmsis_compiler.h)(0x5ED127E8)
+I (..\SDK\CMSIS\Include\cmsis_armcc.h)(0x5ED127E8)
+I (..\SDK\CMSIS\Device\ST\STM32F1xx\Include\system_stm32f1xx.h)(0x5ED127E4)
+I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5F63877C)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_rcc_ex.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_gpio.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_gpio_ex.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_cortex.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_flash.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_flash_ex.h)(0x5ED127E8)
+F (..\Driver\driver_led.h)(0x67756055)()
+F (..\Driver\driver_key.c)(0x677562F8)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Core -I ..\Main -I ..\Driver -I ..\SDK\CMSIS\Include -I ..\SDK\CMSIS\Device\ST\STM32F1xx\Include -I ..\SDK\STM32F1xx_HAL_Driver\Src -I ..\SDK\STM32F1xx_HAL_Driver\Inc-I"D:\Program Files\Keil_v5\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\Program Files\Keil_v5\ARM\CMSIS\Include"-D__UVISION_VERSION="532" -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o .\objects\driver_key.o --omf_browse .\objects\driver_key.crf --depend .\objects\driver_key.d)
+I (..\Driver\driver_key.h)(0x6775624E)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal.h)(0x5ED127E8)
+I (..\Core\stm32f1xx_hal_conf.h)(0x5FA3622E)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_rcc.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_def.h)(0x5ED127E8)
+I (..\SDK\CMSIS\Device\ST\STM32F1xx\Include\stm32f1xx.h)(0x5ED127E4)
+I (..\SDK\CMSIS\Device\ST\STM32F1xx\Include\stm32f103xe.h)(0x5ED127E4)
+I (..\SDK\CMSIS\Include\core_cm3.h)(0x5ED127E8)
+I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5F63877C)
+I (..\SDK\CMSIS\Include\cmsis_version.h)(0x5ED127E8)
+I (..\SDK\CMSIS\Include\cmsis_compiler.h)(0x5ED127E8)
+I (..\SDK\CMSIS\Include\cmsis_armcc.h)(0x5ED127E8)
+I (..\SDK\CMSIS\Device\ST\STM32F1xx\Include\system_stm32f1xx.h)(0x5ED127E4)
+I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5F63877C)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_rcc_ex.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_gpio.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_gpio_ex.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_cortex.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_flash.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_flash_ex.h)(0x5ED127E8)
+I (..\Driver\driver_led.h)(0x67756055)
+F (..\Driver\driver_key.h)(0x6775624E)()
+F (..\Core\startup_stm32f103xe.s)(0x5ED127E4)(--cpu Cortex-M3 -g --apcs=interwork --pd "__MICROLIB SETA 1"-I"D:\Program Files\Keil_v5\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\Program Files\Keil_v5\ARM\CMSIS\Include"--pd "__UVISION_VERSION SETA 532" --pd "STM32F10X_HD SETA 1"--list .\listings\startup_stm32f103xe.lst --xref -o .\objects\startup_stm32f103xe.o --depend .\objects\startup_stm32f103xe.d)
+F (..\Core\stm32f1xx_clk.c)(0x661563C2)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Core -I ..\Main -I ..\Driver -I ..\SDK\CMSIS\Include -I ..\SDK\CMSIS\Device\ST\STM32F1xx\Include -I ..\SDK\STM32F1xx_HAL_Driver\Src -I ..\SDK\STM32F1xx_HAL_Driver\Inc-I"D:\Program Files\Keil_v5\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\Program Files\Keil_v5\ARM\CMSIS\Include"-D__UVISION_VERSION="532" -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o .\objects\stm32f1xx_clk.o --omf_browse .\objects\stm32f1xx_clk.crf --depend .\objects\stm32f1xx_clk.d)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal.h)(0x5ED127E8)
+I (..\Core\stm32f1xx_hal_conf.h)(0x5FA3622E)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_rcc.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_def.h)(0x5ED127E8)
+I (..\SDK\CMSIS\Device\ST\STM32F1xx\Include\stm32f1xx.h)(0x5ED127E4)
+I (..\SDK\CMSIS\Device\ST\STM32F1xx\Include\stm32f103xe.h)(0x5ED127E4)
+I (..\SDK\CMSIS\Include\core_cm3.h)(0x5ED127E8)
+I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5F63877C)
+I (..\SDK\CMSIS\Include\cmsis_version.h)(0x5ED127E8)
+I (..\SDK\CMSIS\Include\cmsis_compiler.h)(0x5ED127E8)
+I (..\SDK\CMSIS\Include\cmsis_armcc.h)(0x5ED127E8)
+I (..\SDK\CMSIS\Device\ST\STM32F1xx\Include\system_stm32f1xx.h)(0x5ED127E4)
+I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5F63877C)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_rcc_ex.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_gpio.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_gpio_ex.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_cortex.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_flash.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_flash_ex.h)(0x5ED127E8)
+I (..\Core\stm32f1xx_clk.h)(0x5FAB82E8)
+F (..\Core\stm32f1xx_it.c)(0x5ED12A78)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Core -I ..\Main -I ..\Driver -I ..\SDK\CMSIS\Include -I ..\SDK\CMSIS\Device\ST\STM32F1xx\Include -I ..\SDK\STM32F1xx_HAL_Driver\Src -I ..\SDK\STM32F1xx_HAL_Driver\Inc-I"D:\Program Files\Keil_v5\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\Program Files\Keil_v5\ARM\CMSIS\Include"-D__UVISION_VERSION="532" -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o .\objects\stm32f1xx_it.o --omf_browse .\objects\stm32f1xx_it.crf --depend .\objects\stm32f1xx_it.d)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal.h)(0x5ED127E8)
+I (..\Core\stm32f1xx_hal_conf.h)(0x5FA3622E)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_rcc.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_def.h)(0x5ED127E8)
+I (..\SDK\CMSIS\Device\ST\STM32F1xx\Include\stm32f1xx.h)(0x5ED127E4)
+I (..\SDK\CMSIS\Device\ST\STM32F1xx\Include\stm32f103xe.h)(0x5ED127E4)
+I (..\SDK\CMSIS\Include\core_cm3.h)(0x5ED127E8)
+I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5F63877C)
+I (..\SDK\CMSIS\Include\cmsis_version.h)(0x5ED127E8)
+I (..\SDK\CMSIS\Include\cmsis_compiler.h)(0x5ED127E8)
+I (..\SDK\CMSIS\Include\cmsis_armcc.h)(0x5ED127E8)
+I (..\SDK\CMSIS\Device\ST\STM32F1xx\Include\system_stm32f1xx.h)(0x5ED127E4)
+I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5F63877C)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_rcc_ex.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_gpio.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_gpio_ex.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_cortex.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_flash.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_flash_ex.h)(0x5ED127E8)
+I (..\Core\stm32f1xx_it.h)(0x5ED127EC)
+F (..\Core\stm32f1xx_hal_conf.h)(0x5FA3622E)()
+F (..\Core\system_stm32f1xx.c)(0x5ED127EC)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Core -I ..\Main -I ..\Driver -I ..\SDK\CMSIS\Include -I ..\SDK\CMSIS\Device\ST\STM32F1xx\Include -I ..\SDK\STM32F1xx_HAL_Driver\Src -I ..\SDK\STM32F1xx_HAL_Driver\Inc-I"D:\Program Files\Keil_v5\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\Program Files\Keil_v5\ARM\CMSIS\Include"-D__UVISION_VERSION="532" -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o .\objects\system_stm32f1xx.o --omf_browse .\objects\system_stm32f1xx.crf --depend .\objects\system_stm32f1xx.d)
+I (..\SDK\CMSIS\Device\ST\STM32F1xx\Include\stm32f1xx.h)(0x5ED127E4)
+I (..\SDK\CMSIS\Device\ST\STM32F1xx\Include\stm32f103xe.h)(0x5ED127E4)
+I (..\SDK\CMSIS\Include\core_cm3.h)(0x5ED127E8)
+I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5F63877C)
+I (..\SDK\CMSIS\Include\cmsis_version.h)(0x5ED127E8)
+I (..\SDK\CMSIS\Include\cmsis_compiler.h)(0x5ED127E8)
+I (..\SDK\CMSIS\Include\cmsis_armcc.h)(0x5ED127E8)
+I (..\SDK\CMSIS\Device\ST\STM32F1xx\Include\system_stm32f1xx.h)(0x5ED127E4)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal.h)(0x5ED127E8)
+I (..\Core\stm32f1xx_hal_conf.h)(0x5FA3622E)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_rcc.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_def.h)(0x5ED127E8)
+I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5F63877C)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_rcc_ex.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_gpio.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_gpio_ex.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_cortex.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_flash.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_flash_ex.h)(0x5ED127E8)
+F (..\SDK\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal.c)(0x5ED127E8)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Core -I ..\Main -I ..\Driver -I ..\SDK\CMSIS\Include -I ..\SDK\CMSIS\Device\ST\STM32F1xx\Include -I ..\SDK\STM32F1xx_HAL_Driver\Src -I ..\SDK\STM32F1xx_HAL_Driver\Inc-I"D:\Program Files\Keil_v5\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\Program Files\Keil_v5\ARM\CMSIS\Include"-D__UVISION_VERSION="532" -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o .\objects\stm32f1xx_hal.o --omf_browse .\objects\stm32f1xx_hal.crf --depend .\objects\stm32f1xx_hal.d)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal.h)(0x5ED127E8)
+I (..\Core\stm32f1xx_hal_conf.h)(0x5FA3622E)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_rcc.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_def.h)(0x5ED127E8)
+I (..\SDK\CMSIS\Device\ST\STM32F1xx\Include\stm32f1xx.h)(0x5ED127E4)
+I (..\SDK\CMSIS\Device\ST\STM32F1xx\Include\stm32f103xe.h)(0x5ED127E4)
+I (..\SDK\CMSIS\Include\core_cm3.h)(0x5ED127E8)
+I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5F63877C)
+I (..\SDK\CMSIS\Include\cmsis_version.h)(0x5ED127E8)
+I (..\SDK\CMSIS\Include\cmsis_compiler.h)(0x5ED127E8)
+I (..\SDK\CMSIS\Include\cmsis_armcc.h)(0x5ED127E8)
+I (..\SDK\CMSIS\Device\ST\STM32F1xx\Include\system_stm32f1xx.h)(0x5ED127E4)
+I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5F63877C)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_rcc_ex.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_gpio.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_gpio_ex.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_cortex.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_flash.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_flash_ex.h)(0x5ED127E8)
+F (..\SDK\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_cortex.c)(0x5ED127E8)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Core -I ..\Main -I ..\Driver -I ..\SDK\CMSIS\Include -I ..\SDK\CMSIS\Device\ST\STM32F1xx\Include -I ..\SDK\STM32F1xx_HAL_Driver\Src -I ..\SDK\STM32F1xx_HAL_Driver\Inc-I"D:\Program Files\Keil_v5\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\Program Files\Keil_v5\ARM\CMSIS\Include"-D__UVISION_VERSION="532" -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o .\objects\stm32f1xx_hal_cortex.o --omf_browse .\objects\stm32f1xx_hal_cortex.crf --depend .\objects\stm32f1xx_hal_cortex.d)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal.h)(0x5ED127E8)
+I (..\Core\stm32f1xx_hal_conf.h)(0x5FA3622E)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_rcc.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_def.h)(0x5ED127E8)
+I (..\SDK\CMSIS\Device\ST\STM32F1xx\Include\stm32f1xx.h)(0x5ED127E4)
+I (..\SDK\CMSIS\Device\ST\STM32F1xx\Include\stm32f103xe.h)(0x5ED127E4)
+I (..\SDK\CMSIS\Include\core_cm3.h)(0x5ED127E8)
+I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5F63877C)
+I (..\SDK\CMSIS\Include\cmsis_version.h)(0x5ED127E8)
+I (..\SDK\CMSIS\Include\cmsis_compiler.h)(0x5ED127E8)
+I (..\SDK\CMSIS\Include\cmsis_armcc.h)(0x5ED127E8)
+I (..\SDK\CMSIS\Device\ST\STM32F1xx\Include\system_stm32f1xx.h)(0x5ED127E4)
+I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5F63877C)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_rcc_ex.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_gpio.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_gpio_ex.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_cortex.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_flash.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_flash_ex.h)(0x5ED127E8)
+F (..\SDK\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc.c)(0x5ED127E8)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Core -I ..\Main -I ..\Driver -I ..\SDK\CMSIS\Include -I ..\SDK\CMSIS\Device\ST\STM32F1xx\Include -I ..\SDK\STM32F1xx_HAL_Driver\Src -I ..\SDK\STM32F1xx_HAL_Driver\Inc-I"D:\Program Files\Keil_v5\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\Program Files\Keil_v5\ARM\CMSIS\Include"-D__UVISION_VERSION="532" -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o .\objects\stm32f1xx_hal_rcc.o --omf_browse .\objects\stm32f1xx_hal_rcc.crf --depend .\objects\stm32f1xx_hal_rcc.d)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal.h)(0x5ED127E8)
+I (..\Core\stm32f1xx_hal_conf.h)(0x5FA3622E)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_rcc.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_def.h)(0x5ED127E8)
+I (..\SDK\CMSIS\Device\ST\STM32F1xx\Include\stm32f1xx.h)(0x5ED127E4)
+I (..\SDK\CMSIS\Device\ST\STM32F1xx\Include\stm32f103xe.h)(0x5ED127E4)
+I (..\SDK\CMSIS\Include\core_cm3.h)(0x5ED127E8)
+I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5F63877C)
+I (..\SDK\CMSIS\Include\cmsis_version.h)(0x5ED127E8)
+I (..\SDK\CMSIS\Include\cmsis_compiler.h)(0x5ED127E8)
+I (..\SDK\CMSIS\Include\cmsis_armcc.h)(0x5ED127E8)
+I (..\SDK\CMSIS\Device\ST\STM32F1xx\Include\system_stm32f1xx.h)(0x5ED127E4)
+I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5F63877C)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_rcc_ex.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_gpio.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_gpio_ex.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_cortex.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_flash.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_flash_ex.h)(0x5ED127E8)
+F (..\SDK\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc_ex.c)(0x5ED127E8)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Core -I ..\Main -I ..\Driver -I ..\SDK\CMSIS\Include -I ..\SDK\CMSIS\Device\ST\STM32F1xx\Include -I ..\SDK\STM32F1xx_HAL_Driver\Src -I ..\SDK\STM32F1xx_HAL_Driver\Inc-I"D:\Program Files\Keil_v5\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\Program Files\Keil_v5\ARM\CMSIS\Include"-D__UVISION_VERSION="532" -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o .\objects\stm32f1xx_hal_rcc_ex.o --omf_browse .\objects\stm32f1xx_hal_rcc_ex.crf --depend .\objects\stm32f1xx_hal_rcc_ex.d)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal.h)(0x5ED127E8)
+I (..\Core\stm32f1xx_hal_conf.h)(0x5FA3622E)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_rcc.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_def.h)(0x5ED127E8)
+I (..\SDK\CMSIS\Device\ST\STM32F1xx\Include\stm32f1xx.h)(0x5ED127E4)
+I (..\SDK\CMSIS\Device\ST\STM32F1xx\Include\stm32f103xe.h)(0x5ED127E4)
+I (..\SDK\CMSIS\Include\core_cm3.h)(0x5ED127E8)
+I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5F63877C)
+I (..\SDK\CMSIS\Include\cmsis_version.h)(0x5ED127E8)
+I (..\SDK\CMSIS\Include\cmsis_compiler.h)(0x5ED127E8)
+I (..\SDK\CMSIS\Include\cmsis_armcc.h)(0x5ED127E8)
+I (..\SDK\CMSIS\Device\ST\STM32F1xx\Include\system_stm32f1xx.h)(0x5ED127E4)
+I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5F63877C)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_rcc_ex.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_gpio.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_gpio_ex.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_cortex.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_flash.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_flash_ex.h)(0x5ED127E8)
+F (..\SDK\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio.c)(0x5ED127E8)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Core -I ..\Main -I ..\Driver -I ..\SDK\CMSIS\Include -I ..\SDK\CMSIS\Device\ST\STM32F1xx\Include -I ..\SDK\STM32F1xx_HAL_Driver\Src -I ..\SDK\STM32F1xx_HAL_Driver\Inc-I"D:\Program Files\Keil_v5\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\Program Files\Keil_v5\ARM\CMSIS\Include"-D__UVISION_VERSION="532" -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o .\objects\stm32f1xx_hal_gpio.o --omf_browse .\objects\stm32f1xx_hal_gpio.crf --depend .\objects\stm32f1xx_hal_gpio.d)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal.h)(0x5ED127E8)
+I (..\Core\stm32f1xx_hal_conf.h)(0x5FA3622E)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_rcc.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_def.h)(0x5ED127E8)
+I (..\SDK\CMSIS\Device\ST\STM32F1xx\Include\stm32f1xx.h)(0x5ED127E4)
+I (..\SDK\CMSIS\Device\ST\STM32F1xx\Include\stm32f103xe.h)(0x5ED127E4)
+I (..\SDK\CMSIS\Include\core_cm3.h)(0x5ED127E8)
+I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5F63877C)
+I (..\SDK\CMSIS\Include\cmsis_version.h)(0x5ED127E8)
+I (..\SDK\CMSIS\Include\cmsis_compiler.h)(0x5ED127E8)
+I (..\SDK\CMSIS\Include\cmsis_armcc.h)(0x5ED127E8)
+I (..\SDK\CMSIS\Device\ST\STM32F1xx\Include\system_stm32f1xx.h)(0x5ED127E4)
+I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5F63877C)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_rcc_ex.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_gpio.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_gpio_ex.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_cortex.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_flash.h)(0x5ED127E8)
+I (..\SDK\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_flash_ex.h)(0x5ED127E8)

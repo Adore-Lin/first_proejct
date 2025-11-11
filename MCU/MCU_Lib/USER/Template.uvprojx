@@ -275,8 +275,8 @@
               </OCR_RVCT3>
               <OCR_RVCT4>
                 <Type>1</Type>
-                <StartAddress>0x8000000</StartAddress>
-                <Size>0x80000</Size>
+                <StartAddress>0x8010000</StartAddress>
+                <Size>0x70000</Size>
               </OCR_RVCT4>
               <OCR_RVCT5>
                 <Type>1</Type>
@@ -432,6 +432,16 @@
               <FileName>exit.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\HARDWARE\exit.h</FilePath>
+            </File>
+            <File>
+              <FileName>timer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\timer.c</FilePath>
+            </File>
+            <File>
+              <FileName>timer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\HARDWARE\timer.h</FilePath>
             </File>
           </Files>
         </Group>

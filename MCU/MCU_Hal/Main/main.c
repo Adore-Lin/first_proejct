@@ -37,6 +37,7 @@ void DriverTest(void)
 {
 	//LedTest();
     KeyTest();
+    UsartInit(115200);
 }
 
 int main(void)

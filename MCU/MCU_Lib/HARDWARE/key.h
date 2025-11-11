@@ -7,17 +7,18 @@
 //#define KEY1 PEin(3)	//PE3 
 //#define WK_UP PAin(0)	//PA0  WK_UP
 
-#define KEY0  GPIO_ReadInputDataBit(GPIOE,GPIO_Pin_4)//¶ÁÈ¡°´¼ü0
-#define KEY1  GPIO_ReadInputDataBit(GPIOE,GPIO_Pin_3)//¶ÁÈ¡°´¼ü1
-#define WK_UP   GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_0)//¶ÁÈ¡°´¼ü3(WK_UP) 
+#define KEY0  GPIO_ReadInputDataBit(GPIOE,GPIO_Pin_4)//è¯»å–æŒ‰é”®0
+#define KEY1  GPIO_ReadInputDataBit(GPIOE,GPIO_Pin_3)//è¯»å–æŒ‰é”®1
+#define WK_UP   GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_0)//è¯»å–æŒ‰é”®3(WK_UP) 
 
  
 
-#define KEY0_PRES 	1	//KEY0°´ÏÂ
-#define KEY1_PRES	2	//KEY1°´ÏÂ
-#define WKUP_PRES   3	//KEY_UP°´ÏÂ(¼´WK_UP/KEY_UP)
+#define KEY0_PRES 	1	//KEY0æŒ‰ä¸‹
+#define KEY1_PRES	2	//KEY1æŒ‰ä¸‹
+#define WKUP_PRES   3	//KEY_UPæŒ‰ä¸‹(å³WK_UP/KEY_UP)
 
 
-void KEY_Init(void);//IO³õÊ¼»¯
-u8 KEY_Scan(u8);  	//°´¼üÉ¨Ãèº¯Êı					    
+void KEY_Init(void);//IOåˆå§‹åŒ–
+u8 KEY_Scan(u8);  	//æŒ‰é”®æ‰«æå‡½æ•°	
+
 #endif
