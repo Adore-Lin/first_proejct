@@ -2,9 +2,9 @@
 #include "delay.h"
 #include "led.h"
 #include "key.h"
-#include "exit.h"
+
 #include "usart.h"
-#include "timer.h"
+
 
 /************************************************
 ALIENTEK 精英STM32F103开发板
@@ -20,61 +20,33 @@ ALIENTEK 精英STM32F103开发板
 
 ************************************************/
 
-void Usart_Test(void)
+/*串口通信测试：实现串口助手自发自收*/
+void usart_test(void)
 {
-	u8 t;
-	u16 len;
-	u16  times = 0;
-
-	if(USART_RX_STA & 0x8000)
+	if (usart_rx_flag == 1)
 	{
-		len = USART_RX_STA & 0x3fff;
-		printf("\r\n, 你发送的消息为：\r\n\r\n");
-		for(t= 0; t < len; t++)
-		{
-			USART_SendData(USART1, USART_RX_BUF[t]);
-			while (USART_GetFlagStatus(USART1, USART_FLAG_TC) != SET);
-		}
-
-		printf("\r\n\r\n");
-
-		USART_RX_STA = 0;
-	}
-	else
-	{
-		times ++;
-		if(times % 5000 == 0)
-		{
-			printf("\r\n Usart Test \r\n");
-		}
-
-		if(times % 200 == 0)
-			printf("Please  input date \r\n");
-
-		if(times % 30 == 0)
-			LED0 = !LED0;
-
-		delay_ms(10);
-	}
+		usart_rx_flag = 0;
+		usart_dma_clear(); //清除DMA的接收数量寄存器，为下一次接收做准备
+		usart_dma_send(usart_rx_buf, usart_rx_len); //将接收到的数据通过DMA发送回去
+		memset(usart_rx_buf, 0, sizeof(usart_rx_buf)); //清空接收缓冲区
+	}	
+	
 }
-
-
 
 void Hardware_Init(void)
 {
 	LED_Init();
 	KEY_Init();
-	EXTIX_Init();
+
 	uart_init(115200);
-	//TIM3_Int_Init(4999, 7199);//中断溢出时间Tout = (4999 + 1)*(7199 + 1)/72 = 500000us = 500ms
-	TIM3_PWM_Init(899, 0);//不分频，PWM频率 = 72000/900 = 80Khz
+	
 }
 
 int main(void)
 {	
 	//变量初始化
-	u16 led0_pwm = 0;
-	u8 dir = 1;
+	// u16 led0_pwm = 0;
+	// u8 dir = 1;
 	
 	//函数初始化
 	delay_init();
@@ -86,8 +58,7 @@ int main(void)
 	 
 	while(1)
 	{
-		
-		
+		usart_test();
 	}
 }
 

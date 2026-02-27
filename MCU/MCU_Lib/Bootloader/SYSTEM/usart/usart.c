@@ -5,34 +5,7 @@
 #if SYSTEM_SUPPORT_OS
 #include "includes.h"					//ucos 使用	  
 #endif
-//////////////////////////////////////////////////////////////////////////////////	 
-//本程序只供学习使用，未经作者许可，不得用于其它任何用途
-//ALIENTEK STM32开发板
-//串口1初始化		   
-//正点原子@ALIENTEK
-//技术论坛:www.openedv.com
-//修改日期:2012/8/18
-//版本：V1.5
-//版权所有，盗版必究。
-//Copyright(C) 广州市星翼电子科技有限公司 2009-2019
-//All rights reserved
-//********************************************************************************
-//V1.3修改说明 
-//支持适应不同频率下的串口波特率设置.
-//加入了对printf的支持
-//增加了串口接收命令功能.
-//修正了printf第一个字符丢失的bug
-//V1.4修改说明
-//1,修改串口初始化IO的bug
-//2,修改了USART_RX_STA,使得串口最大接收字节数为2的14次方
-//3,增加了USART_REC_LEN,用于定义串口最大允许接收的字节数(不大于2的14次方)
-//4,修改了EN_USART1_RX的使能方式
-//V1.5修改说明
-//1,增加了对UCOSII的支持
-////////////////////////////////////////////////////////////////////////////////// 	  
- 
 
-//////////////////////////////////////////////////////////////////
 //加入以下代码,支持printf函数,而不需要选择use MicroLIB	  
 #if 1
 #pragma import(__use_no_semihosting)             
@@ -76,15 +49,15 @@ int GetKey (void)  {
 }
 */
  
-#if EN_USART1_RX   //如果使能了接收
 //串口1中断服务程序
 //注意,读取USARTx->SR能避免莫名其妙的错误   	
-u8 USART_RX_BUF[USART_REC_LEN];     //接收缓冲,最大USART_REC_LEN个字节.
-//接收状态
-//bit15，	接收完成标志
-//bit14，	接收到0x0d
-//bit13~0，	接收到的有效字节数目
-u16 USART_RX_STA=0;       //接收状态标记	  
+u8 usart_rx_buf[USART_REC_LEN] = {0};     //接收缓冲,最大USART_REC_LEN个字节.
+u8 usart_rx_flag = 0;       //接收状态标记
+u8 usart_rx_len = 0;      //接收的数据长度
+
+u8 usart_send_buf[USART_REC_LEN] = {0};    //发送缓冲,最大USART_REC_LEN个字节.
+u8 usart_send_flag = 0;		//发送状态标记
+u8 usart_send_len = 0;     //发送的数据长度
   
 void uart_init(u32 bound)
 {
@@ -92,9 +65,10 @@ void uart_init(u32 bound)
 	GPIO_InitTypeDef GPIO_InitStructure;
 	USART_InitTypeDef USART_InitStructure;
 	NVIC_InitTypeDef NVIC_InitStructure;
+	DMA_InitTypeDef DMA_InitStructure;
 	 
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1|RCC_APB2Periph_GPIOA, ENABLE);	//使能USART1，GPIOA时钟
-  
+	
 	//USART1_TX   GPIOA.9
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9; //PA.9
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
@@ -122,50 +96,102 @@ void uart_init(u32 bound)
 	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;	//收发模式
 
 	USART_Init(USART1, &USART_InitStructure); //初始化串口1
-	USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);//开启串口接受中断
 	USART_Cmd(USART1, ENABLE);                    //使能串口1 
+
+	USART_ITConfig(USART1,USART_IT_TC,ENABLE);//开启串口传输完成中断
+	USART_ITConfig(USART1, USART_IT_IDLE, ENABLE);//开启串口空闲中断
+
+	//配置DMA传输
+	DMA_DeInit(DMA1_Channel4);
+	DMA_DeInit(DMA1_Channel5);
+
+	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);	//使能DMA1时钟
+
+	//DMA1_Channel5 USART1_RX
+	DMA_InitStructure.DMA_BufferSize = sizeof(usart_rx_buf);//接收缓冲区的大小
+	DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralSRC;//外设作为数据传的源
+	DMA_InitStructure.DMA_M2M = DMA_M2M_Disable;//禁止内存到内存传输
+	DMA_InitStructure.DMA_MemoryBaseAddr = (u32)usart_rx_buf;//内存地址
+	DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_Byte;//内存数据宽度为8位
+	DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;//内存地址自动增加
+	DMA_InitStructure.DMA_Mode = DMA_Mode_Normal;//工作在正常模式
+	DMA_InitStructure.DMA_PeripheralBaseAddr = (u32)&USART1->DR;//外设地址
+	DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Byte;//外设数据宽度为8位
+	DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;//外设地址自动增加
+	DMA_InitStructure.DMA_Priority = DMA_Priority_High;//高优先级
+	DMA_Init(DMA1_Channel5, &DMA_InitStructure);//根据DMA_InitStruct中指定的参数初始化DMA外设
+
+	//DMA1_Channel4 USART1_TX
+	DMA_InitStructure.DMA_BufferSize = 0;//发送缓冲区的大小，初始化为0不发送
+	DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralDST;//外设作为数据传输的目的
+	DMA_InitStructure.DMA_MemoryBaseAddr = (u32)usart_send_buf;//内存地址，初始化为0不发送
+	DMA_Init(DMA1_Channel4, &DMA_InitStructure);//根据DMA_InitStruct中指定的参数初始化DMA外设
+	
+	DMA_Cmd(DMA1_Channel5, ENABLE);
+	DMA_Cmd(DMA1_Channel4, ENABLE);
+
+	USART_DMACmd(USART1, USART_DMAReq_Tx | USART_DMAReq_Rx, ENABLE);
+}
+
+/*清除DMA的接收数量寄存器*/
+void usart_dma_clear(void)
+{
+	DMA_Cmd(DMA1_Channel5, DISABLE);
+	DMA_SetCurrDataCounter(DMA1_Channel5, sizeof(usart_rx_buf));
+	DMA_Cmd(DMA1_Channel5, ENABLE);
+}
+
+/*串口1发送数据*/
+void usart_dma_send(u8 *buf, u16 len)
+{ 
+	u8 send_len;
+	
+	if(len == 0 || buf == NULL)
+	{
+		return;
+	}
+
+	send_len = (len > sizeof(usart_send_buf)) ? sizeof(usart_send_buf) : len; //限制发送长度不超过缓冲区大小
+
+	while(DMA_GetCurrDataCounter(DMA1_Channel4));//等待DMA传输完成
+
+	memcpy(usart_send_buf, buf, send_len); //将数据复制到发送缓冲区
+
+	DMA_Cmd(DMA1_Channel4, DISABLE); //先禁止DMA传输
+	DMA_SetCurrDataCounter(DMA1_Channel4, send_len);//设置DMA传输数量
+	DMA_Cmd(DMA1_Channel4, ENABLE); //使能DMA传输
 }
 
 //串口1中断服务程序
 void USART1_IRQHandler(void)                	
 {
-	u8 Res;
-#if SYSTEM_SUPPORT_OS 		//如果SYSTEM_SUPPORT_OS为真，则需要支持OS.
-	OSIntEnter();    
-#endif
-	if(USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)  //接收中断(接收到的数据必须是0x0d 0x0a结尾)
-	{
-		Res = USART_ReceiveData(USART1);	//读取接收到的数据
-		
-		if((USART_RX_STA & 0x8000) == 0)//接收未完成
-		{
-			if(USART_RX_STA & 0x4000)//接收到了0x0d
-			{
-				if(Res!=0x0a)
-					USART_RX_STA = 0;//接收错误,重新开始
-				else 
-					USART_RX_STA |= 0x8000;	//接收完成了 
-			}
-			else //还没收到0X0D
-			{	
-				if(Res==0x0d)
-					USART_RX_STA |= 0x4000;
-				else
-				{
-					USART_RX_BUF[USART_RX_STA & 0X3FFF] = Res ;
-					USART_RX_STA++;
+	u8 clear;
 
-					if(USART_RX_STA>(USART_REC_LEN-1))
-						USART_RX_STA = 0;//接收数据错误,重新开始接收	  
-				}		 
-			}
-		}   		 
+	if (USART_GetITStatus(USART1, USART_IT_IDLE) != RESET)  //接收中断(接收到的数据必须是0x0d 0x0a结尾)
+	{
+		clear = USART1->SR;	//读取SR寄存器清除中断标志
+		clear = USART1->DR;	//读取DR寄存器清除中断标志
+
+		usart_rx_flag = 1; //设置接收完成标志
+		usart_rx_len = sizeof(usart_rx_buf) - DMA_GetCurrDataCounter(DMA1_Channel5); //计算接收的数据长度
     } 
-#if SYSTEM_SUPPORT_OS 	//如果SYSTEM_SUPPORT_OS为真，则需要支持OS.
-	OSIntExit();  											 
-#endif
+
+	if(USART_GetITStatus(USART1, USART_IT_TC) != RESET)  //发送完成中断
+	{
+		USART_ClearITPendingBit(USART1, USART_IT_TC); //清除发送完成中断标志
+		DMA_Cmd(DMA1_Channel4, DISABLE); //禁止DMA传输
+		usart_send_flag = 1;
+	}
 } 
-#endif	
+/*
+*clear 变量的作用，为什么需要读取 SR 和 DR？
+在 STM32 的 USART 外设中，当发生空闲中断（IDLE interrupt）时，硬件会自动将接收缓冲区中的数据通过 DMA 传输到内存中。
+所以为了清除这个中断标志，必须按照 STM32 的要求执行以下操作：
+	读取状态寄存器 (SR)：这是为了确认中断的发生，并准备清除中断标志。
+	读取数据寄存器 (DR)：这是关键步骤，读取 DR 寄存器会清除 IDLE 中断标志。
+	如果不执行这两个读取操作，中断标志不会被清除，可能会导致中断持续触发或无法正确处理后续的中断。
+*/
+	
 
 
 

@@ -424,24 +424,14 @@
               <FilePath>..\HARDWARE\led.h</FilePath>
             </File>
             <File>
-              <FileName>exit.c</FileName>
+              <FileName>stmflash.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\HARDWARE\exit.c</FilePath>
+              <FilePath>..\HARDWARE\stmflash.c</FilePath>
             </File>
             <File>
-              <FileName>exit.h</FileName>
+              <FileName>stmflash.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\HARDWARE\exit.h</FilePath>
-            </File>
-            <File>
-              <FileName>timer.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\HARDWARE\timer.c</FilePath>
-            </File>
-            <File>
-              <FileName>timer.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\HARDWARE\timer.h</FilePath>
+              <FilePath>..\HARDWARE\stmflash.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -607,6 +597,21 @@
               <FileName>README.TXT</FileName>
               <FileType>5</FileType>
               <FilePath>..\README.TXT</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>IAP</GroupName>
+          <Files>
+            <File>
+              <FileName>iap.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\IAP\iap.c</FilePath>
+            </File>
+            <File>
+              <FileName>iap.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\IAP\iap.h</FilePath>
             </File>
           </Files>
         </Group>
