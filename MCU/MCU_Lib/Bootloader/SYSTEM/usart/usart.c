@@ -1,6 +1,6 @@
 #include "sys.h"
 #include "usart.h"	 
-////////////////////////////////////////////////////////////////////////////////// 	 
+ 	 
 //如果使用ucos,则包括下面的头文件即可.
 #if SYSTEM_SUPPORT_OS
 #include "includes.h"					//ucos 使用	  
@@ -59,7 +59,7 @@ u8 usart_send_buf[USART_REC_LEN] = {0};    //发送缓冲,最大USART_REC_LEN个
 u8 usart_send_flag = 0;		//发送状态标记
 u8 usart_send_len = 0;     //发送的数据长度
   
-void uart_init(u32 bound)
+void Uart_Init(u32 bound)
 {
   	//GPIO端口设置
 	GPIO_InitTypeDef GPIO_InitStructure;
@@ -134,7 +134,7 @@ void uart_init(u32 bound)
 }
 
 /*清除DMA的接收数量寄存器*/
-void usart_dma_clear(void)
+void Usart_DMA_Clear(void)
 {
 	DMA_Cmd(DMA1_Channel5, DISABLE);
 	DMA_SetCurrDataCounter(DMA1_Channel5, sizeof(usart_rx_buf));
@@ -142,7 +142,7 @@ void usart_dma_clear(void)
 }
 
 /*串口1发送数据*/
-void usart_dma_send(u8 *buf, u16 len)
+void Usart_DMA_Send(u8 *buf, u16 len)
 { 
 	u8 send_len;
 	
