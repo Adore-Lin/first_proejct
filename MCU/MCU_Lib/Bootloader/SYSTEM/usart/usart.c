@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include <stdarg.h>
+
 #include "sys.h"
 #include "usart.h"	 
  	 
@@ -59,13 +62,12 @@ u8 usart_send_buf[USART_REC_LEN] = {0};    //发送缓冲,最大USART_REC_LEN个
 u8 usart_send_flag = 0;		//发送状态标记
 u8 usart_send_len = 0;     //发送的数据长度
   
-void Uart_Init(u32 bound)
+void Usart_Init(u32 bound)
 {
   	//GPIO端口设置
 	GPIO_InitTypeDef GPIO_InitStructure;
 	USART_InitTypeDef USART_InitStructure;
 	NVIC_InitTypeDef NVIC_InitStructure;
-	DMA_InitTypeDef DMA_InitStructure;
 	 
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1|RCC_APB2Periph_GPIOA, ENABLE);	//使能USART1，GPIOA时钟
 	
@@ -96,10 +98,19 @@ void Uart_Init(u32 bound)
 	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;	//收发模式
 
 	USART_Init(USART1, &USART_InitStructure); //初始化串口1
-	USART_Cmd(USART1, ENABLE);                    //使能串口1 
+	USART_Cmd(USART1, ENABLE);                //使能串口1 
 
 	USART_ITConfig(USART1,USART_IT_TC,ENABLE);//开启串口传输完成中断
 	USART_ITConfig(USART1, USART_IT_IDLE, ENABLE);//开启串口空闲中断
+
+	Usart_DMA_Init();
+	USART_DMACmd(USART1, USART_DMAReq_Tx | USART_DMAReq_Rx, ENABLE);
+}
+
+/*DMA初始化*/
+void Usart_DMA_Init(void)
+{
+	DMA_InitTypeDef DMA_InitStructure;
 
 	//配置DMA传输
 	DMA_DeInit(DMA1_Channel4);
@@ -129,8 +140,6 @@ void Uart_Init(u32 bound)
 	
 	DMA_Cmd(DMA1_Channel5, ENABLE);
 	DMA_Cmd(DMA1_Channel4, ENABLE);
-
-	USART_DMACmd(USART1, USART_DMAReq_Tx | USART_DMAReq_Rx, ENABLE);
 }
 
 /*清除DMA的接收数量寄存器*/
@@ -191,7 +200,23 @@ void USART1_IRQHandler(void)
 	读取数据寄存器 (DR)：这是关键步骤，读取 DR 寄存器会清除 IDLE 中断标志。
 	如果不执行这两个读取操作，中断标志不会被清除，可能会导致中断持续触发或无法正确处理后续的中断。
 */
+
+void Usart_Printf(char *fmt, ...)
+{
+	u16 i;
+	va_list args;
+	va_start(args, fmt);
+	vsprintf((char *)usart_send_buf, fmt, args);
+	va_end(args);
 	
+	for(i = 0; i < strlen((const char*)usart_send_buf); i++)
+	{
+		while(USART_GetFlagStatus(USART1, USART_FLAG_TXE) != SET); //等待发送完成
+		USART_SendData(USART1, usart_send_buf[i]);
+	}
+
+	while(USART_GetFlagStatus(USART1, USART_FLAG_TC) != SET); //等待发送完成
+}	
 
 
 

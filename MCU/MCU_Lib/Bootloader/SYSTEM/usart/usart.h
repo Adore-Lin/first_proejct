@@ -11,12 +11,14 @@ extern u8 usart_rx_buf[USART_REC_LEN];     //接收缓冲,最大USART_REC_LEN个
 extern u8 usart_rx_flag;       //接收状态标记
 extern u8 usart_rx_len;      //接收的数据长度
 extern u8 usart_send_flag;	//发送状态标记
-//如果想串口中断接收，请不要注释以下宏定义
 
-void Uart_Init(u32 bound);
+void Usart_Init(u32 bound);
 
+void Usart_DMA_Init(void);
 void Usart_DMA_Clear(void);
 void Usart_DMA_Send(u8 *buf, u16 len);
+
+void Usart_Printf(char *fmt, ...);
 #endif
 
 

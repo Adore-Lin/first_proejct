@@ -6,6 +6,7 @@
 #include "usart.h"
 #include "24cxx.h"
 #include "w25qxx.h"
+#include "iap.h"
 
 /************************************************
 ALIENTEK 精英STM32F103开发板
@@ -17,6 +18,11 @@ ALIENTEK 精英STM32F103开发板
 
 ************************************************/
 
+const u8 AT24C02_Buff[100] = "AT24C02_Buff";
+const u8 W25QXX_Buff[100] = "W25QXX_Buff";
+
+u8 usart_send_date[100];
+
 /*串口通信测试：实现串口助手自发自收*/
 void Usart_Test(void)
 {
@@ -27,7 +33,32 @@ void Usart_Test(void)
 		Usart_DMA_Send(usart_rx_buf, usart_rx_len); //将接收到的数据通过DMA发送回去
 		memset(usart_rx_buf, 0, sizeof(usart_rx_buf)); //清空接收缓冲区
 	}	
-	
+}
+
+/*AT24CXX测试：实现按下按键0写入数据，按下按键1读取数据，并且发送到串口助手, 按下按键时要停顿一会*/
+void AT24CXX_Test(void)
+{ 
+	if (KEY_Scan(0) == KEY0_PRES)
+	{
+		AT24CXX_Write(0, (u8 *)AT24C02_Buff, sizeof(AT24C02_Buff));
+		Usart_Printf("AT24C02_Write OK!\r\n");
+	}
+
+	if (KEY_Scan(0) == KEY1_PRES)
+	{
+		AT24CXX_Read(0, (u8 *)usart_send_date, sizeof(usart_send_date));	
+		Usart_Printf("AT24C02_Read: %s\r\n", usart_send_date);
+	}
+
+	if (usart_send_flag == 1)
+	{
+		usart_send_flag = 0;
+	}
+
+}
+
+void W25QXX_Test(void)
+{ 
 }
 
 void Hardware_Init(void)
@@ -35,7 +66,7 @@ void Hardware_Init(void)
 	LED_Init();
 	KEY_Init();
 
-	Uart_Init(115200);
+	Usart_Init(115200);
 	AT24CXX_Init();
 	W25QXX_Init();
 }
@@ -52,11 +83,16 @@ int main(void)
  
 	//驱动初始化
 	Hardware_Init();
-
+	Usart_Printf("IAP Test!\r\n");
 	 
 	while(1)
 	{
-		Usart_Test();
+		// Usart_Test();
+		// AT24CXX_Test();
+		// W25QXX_Test();
+		OTA_Check_Flag();
+		
+		
 	}
 }
 

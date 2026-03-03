@@ -1,6 +1,6 @@
 #include "24cxx.h" 
 #include "delay.h"
-
+#include "iap.h"
 
 //初始化IIC接口
 void AT24CXX_Init(void)
@@ -128,6 +128,16 @@ void AT24CXX_Write(u16 WriteAddr,u8 *pBuffer,u16 NumToWrite)
 		WriteAddr++;
 		pBuffer++;
 	}
+}
+
+u32 OTA_Read_Flag(void)
+{
+	OTA_Struct OTA_Info;
+	memset(&OTA_Info, 0, sizeof(OTA_Info));
+
+	AT24CXX_Read(0, (u8 *)&OTA_Info, sizeof(OTA_Info));
+
+	return OTA_Info.OTA_Flag;
 }
  
 

@@ -23,6 +23,9 @@ void AT24CXX_Read(u16 ReadAddr,u8 *pBuffer,u16 NumToRead);   	//从指定地址�
 
 u8 AT24CXX_Check(void);  //检查器件
 void AT24CXX_Init(void); //初始化IIC
+
+u32 OTA_Read_Flag(void);  //读取OTA标志位
+
 #endif
 
 

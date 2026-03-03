@@ -4,6 +4,9 @@
 #include "stmflash.h"
 #include "iap.h"
 
+OTA_Struct OTA_Info;
+
+
 iapfun jump2app; 
 u16 iapbuf[1024];   
 //appxaddr:应用程序的起始地址
@@ -44,7 +47,19 @@ void iap_load_app(u32 appxaddr)
 	}
 }		 
 
-
+void OTA_Check_Flag(void)
+{
+	if (OTA_Read_Flag() == OTA_SET_FLAG)
+	{
+		// 执行OTA升级
+		Usart_Printf("OTA Upgrade Start!\r\n");
+	}
+	else
+	{
+		// 不执行OTA升级
+		Usart_Printf("No OTA Upgrade!\r\n");
+	}
+}
 
 
 
