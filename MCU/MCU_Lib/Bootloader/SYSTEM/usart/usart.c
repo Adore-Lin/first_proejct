@@ -2,7 +2,8 @@
 #include <stdarg.h>
 
 #include "sys.h"
-#include "usart.h"	 
+#include "usart.h"	
+#include "circle_buffer.h" 
  	 
 //如果使用ucos,则包括下面的头文件即可.
 #if SYSTEM_SUPPORT_OS
@@ -61,13 +62,19 @@ u8 usart_rx_len = 0;      //接收的数据长度
 u8 usart_send_buf[USART_REC_LEN] = {0};    //发送缓冲,最大USART_REC_LEN个字节.
 u8 usart_send_flag = 0;		//发送状态标记
 u8 usart_send_len = 0;     //发送的数据长度
+
+u8 g_circle_buf[USART_REC_LEN * 2] = {0};
+circle_buf usart_rx_circle_buf;
   
 void Usart_Init(u32 bound)
 {
-  	//GPIO端口设置
+	//GPIO端口设置
 	GPIO_InitTypeDef GPIO_InitStructure;
 	USART_InitTypeDef USART_InitStructure;
 	NVIC_InitTypeDef NVIC_InitStructure;
+
+	//初始化接收环形缓冲区
+	circle_buffer_init(&usart_rx_circle_buf, USART_REC_LEN, g_circle_buf);
 	 
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1|RCC_APB2Periph_GPIOA, ENABLE);	//使能USART1，GPIOA时钟
 	
@@ -175,6 +182,7 @@ void Usart_DMA_Send(u8 *buf, u16 len)
 void USART1_IRQHandler(void)                	
 {
 	u8 clear;
+	u16 i;
 
 	if (USART_GetITStatus(USART1, USART_IT_IDLE) != RESET)  //接收中断(接收到的数据必须是0x0d 0x0a结尾)
 	{
@@ -183,7 +191,16 @@ void USART1_IRQHandler(void)
 
 		usart_rx_flag = 1; //设置接收完成标志
 		usart_rx_len = sizeof(usart_rx_buf) - DMA_GetCurrDataCounter(DMA1_Channel5); //计算接收的数据长度
-    } 
+    
+		//将接收的数据写入环形缓冲区
+		// for(i = 0; i < usart_rx_len; i++)
+		// {
+		// 	circle_buffer_write(&usart_rx_circle_buf, usart_rx_buf[i]);
+		// }
+
+		// Usart_DMA_Clear();
+		// memset(usart_rx_buf, 0, sizeof(usart_rx_buf)); //清空接收缓冲区
+	} 
 
 	if(USART_GetITStatus(USART1, USART_IT_TC) != RESET)  //发送完成中断
 	{
@@ -215,7 +232,7 @@ void Usart_Printf(char *fmt, ...)
 		USART_SendData(USART1, usart_send_buf[i]);
 	}
 
-	while(USART_GetFlagStatus(USART1, USART_FLAG_TC) != SET); //等待发送完成
+	while(USART_GetFlagStatus(USART1, USART_FLAG_TXE) != SET); //等待发送完成
 }	
 
 

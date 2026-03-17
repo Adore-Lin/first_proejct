@@ -130,6 +130,32 @@ void AT24CXX_Write(u16 WriteAddr,u8 *pBuffer,u16 NumToWrite)
 	}
 }
 
+/***********************************************自己添加的函数**************************************************************************/
+/*检查OTA_flag*/
+void OTA_Check_Flag(void)
+{
+	if (OTA_Read_Flag() == OTA_SUCCESS_FLAG)
+	{
+		// 执行OTA升级
+		Usart_Printf("OTA Upgrade Start!\r\n");
+	}
+	else
+	{
+		// 不执行OTA升级
+		Usart_Printf("No OTA Upgrade!\r\n");
+	}
+}
+
+/*将OTA_flag写入24C02*/
+void OTA_Write_Flag(u32 OTA_Flag)
+{
+	OTA_Struct OTA_Info;
+	memset(&OTA_Info, 0, sizeof(OTA_Struct));
+	OTA_Info.OTA_Flag = OTA_Flag;
+
+	AT24CXX_Write(0, (u8 *)&OTA_Info, sizeof(OTA_Info));
+}
+/*从24C02读取OTA_flag*/
 u32 OTA_Read_Flag(void)
 {
 	OTA_Struct OTA_Info;

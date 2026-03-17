@@ -861,7 +861,7 @@ void USART_IrDACmd(USART_TypeDef* USARTx, FunctionalState NewState)
   *   This parameter can be one of the following values:
   *     @arg USART_FLAG_CTS:  CTS Change flag (not available for UART4 and UART5)
   *     @arg USART_FLAG_LBD:  LIN Break detection flag
-  *     @arg  :  Transmit data register empty flag
+  *     @arg USART_FLAG_TXE:  Transmit data register empty flag
   *     @arg USART_FLAG_TC:   Transmission Complete flag
   *     @arg USART_FLAG_RXNE: Receive data register not empty flag
   *     @arg USART_FLAG_IDLE: Idle Line detection flag
