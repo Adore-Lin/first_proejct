@@ -55,27 +55,24 @@ int GetKey (void)  {
  
 //串口1中断服务程序
 //注意,读取USARTx->SR能避免莫名其妙的错误   	
-u8 usart_rx_buf[USART_REC_LEN] = {0};     //接收缓冲,最大USART_REC_LEN个字节.
+u8 usart_rx_buf[USART_RX_SIZE] = {0};     
 u8 usart_rx_flag = 0;       //接收状态标记
 u8 usart_rx_len = 0;      //接收的数据长度
 
-u8 usart_send_buf[USART_REC_LEN] = {0};    //发送缓冲,最大USART_REC_LEN个字节.
+rx_circle_buf_t rx_circle_buf;
+
+u8 usart_send_buf[USART_RX_SIZE] = {0};    
 u8 usart_send_flag = 0;		//发送状态标记
 u8 usart_send_len = 0;     //发送的数据长度
 
-u8 g_circle_buf[USART_REC_LEN * 2] = {0};
-circle_buf usart_rx_circle_buf;
-  
 void Usart_Init(u32 bound)
 {
 	//GPIO端口设置
 	GPIO_InitTypeDef GPIO_InitStructure;
 	USART_InitTypeDef USART_InitStructure;
 	NVIC_InitTypeDef NVIC_InitStructure;
-
-	//初始化接收环形缓冲区
-	circle_buffer_init(&usart_rx_circle_buf, USART_REC_LEN, g_circle_buf);
-	 
+ 
+	rx_buff_init();
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1|RCC_APB2Periph_GPIOA, ENABLE);	//使能USART1，GPIOA时钟
 	
 	//USART1_TX   GPIOA.9
@@ -126,7 +123,7 @@ void Usart_DMA_Init(void)
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);	//使能DMA1时钟
 
 	//DMA1_Channel5 USART1_RX
-	DMA_InitStructure.DMA_BufferSize = sizeof(usart_rx_buf);//接收缓冲区的大小
+	DMA_InitStructure.DMA_BufferSize = USART_RX_MAX+1;//接收缓冲区的大小
 	DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralSRC;//外设作为数据传的源
 	DMA_InitStructure.DMA_M2M = DMA_M2M_Disable;//禁止内存到内存传输
 	DMA_InitStructure.DMA_MemoryBaseAddr = (u32)usart_rx_buf;//内存地址
@@ -153,8 +150,14 @@ void Usart_DMA_Init(void)
 void Usart_DMA_Clear(void)
 {
 	DMA_Cmd(DMA1_Channel5, DISABLE);
-	DMA_SetCurrDataCounter(DMA1_Channel5, sizeof(usart_rx_buf));
+	DMA_SetCurrDataCounter(DMA1_Channel5, USART_RX_MAX+1);
 	DMA_Cmd(DMA1_Channel5, ENABLE);
+}
+
+/*重置DMA接收：重新配置DMA地址，并使能DMA接收*/
+void Usart_DMA_Reset(void)
+{
+    
 }
 
 /*串口1发送数据*/
@@ -182,24 +185,50 @@ void Usart_DMA_Send(u8 *buf, u16 len)
 void USART1_IRQHandler(void)                	
 {
 	u8 clear;
-	u16 i;
+	//u16 i;
 
 	if (USART_GetITStatus(USART1, USART_IT_IDLE) != RESET)  //接收中断(接收到的数据必须是0x0d 0x0a结尾)
 	{
 		clear = USART1->SR;	//读取SR寄存器清除中断标志
 		clear = USART1->DR;	//读取DR寄存器清除中断标志
-
+		
 		usart_rx_flag = 1; //设置接收完成标志
-		usart_rx_len = sizeof(usart_rx_buf) - DMA_GetCurrDataCounter(DMA1_Channel5); //计算接收的数据长度
+		usart_rx_len = (USART_RX_MAX+1) - DMA_GetCurrDataCounter(DMA1_Channel5); //计算接收的数据长度
     
 		//将接收的数据写入环形缓冲区
-		// for(i = 0; i < usart_rx_len; i++)
-		// {
-		// 	circle_buffer_write(&usart_rx_circle_buf, usart_rx_buf[i]);
-		// }
+		rx_circle_buf.rx_count += usart_rx_len;
+		if (rx_circle_buf.rx_count > 0 && rx_circle_buf.rx_count <= USART_RX_SIZE)
+		{
+			rx_circle_buf.rx_data_in->end = &usart_rx_buf[rx_circle_buf.rx_count -1];
+		}
+		
+		rx_circle_buf.rx_data_in++;
 
-		// Usart_DMA_Clear();
-		// memset(usart_rx_buf, 0, sizeof(usart_rx_buf)); //清空接收缓冲区
+		/*如果接收缓冲区已满，重置接收缓冲区*/
+		if (rx_circle_buf.rx_data_in == rx_circle_buf.rx_data_end)
+		{
+			rx_circle_buf.rx_data_in = &rx_circle_buf.rx_data[0];
+		}
+
+		/*检查最后一个数据包时，数组空间是否足够*/
+		if (USART_RX_SIZE - rx_circle_buf.rx_count >= USART_RX_MAX)
+		{
+			rx_circle_buf.rx_data_in->start = &usart_rx_buf[rx_circle_buf.rx_count];
+		}
+		else
+		{
+			rx_circle_buf.rx_data_in->start = usart_rx_buf;
+			rx_circle_buf.rx_count = 0;
+		}
+
+		/*重置DMA接收:重新配置DMA地址*/
+		DMA_Cmd(DMA1_Channel5, DISABLE);
+
+		DMA1_Channel5->CNDTR = USART_RX_MAX+1;
+		DMA1_Channel5->CMAR = (u32)rx_circle_buf.rx_data_in->start;
+		// DMA1_Channel5->CPAR = (uint32_t)&USART1->DR;
+		
+		DMA_Cmd(DMA1_Channel5, ENABLE);
 	} 
 
 	if(USART_GetITStatus(USART1, USART_IT_TC) != RESET)  //发送完成中断
@@ -235,5 +264,15 @@ void Usart_Printf(char *fmt, ...)
 	while(USART_GetFlagStatus(USART1, USART_FLAG_TXE) != SET); //等待发送完成
 }	
 
+/*缓冲区数组二*/
+
+void rx_buff_init(void)
+{
+    rx_circle_buf.rx_data_in = &rx_circle_buf.rx_data[0];
+    rx_circle_buf.rx_data_out = &rx_circle_buf.rx_data[0];
+    rx_circle_buf.rx_data_end = &rx_circle_buf.rx_data[NUM - 1];
+    rx_circle_buf.rx_data_in->start = usart_rx_buf;
+    rx_circle_buf.rx_count = 0;
+}
 
 
