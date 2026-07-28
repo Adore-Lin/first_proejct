@@ -4,6 +4,9 @@
 #include "stmflash.h"
 #include "iap.h"
 
+typedef void (*otafun)(void);
+otafun ota_fun;
+
 iapfun jump2app; 
 u16 iapbuf[1024];   
 //appxaddr:应用程序的起始地址
@@ -38,13 +41,35 @@ void iap_load_app(u32 appxaddr)
 {
 	if(((*(vu32*)appxaddr)&0x2FFE0000)==0x20000000)	//检查栈顶地址是否合法.
 	{ 
+		Usart_Printf("Jump to App Success!\r\n");
+		// iap_load_deinit();
 		jump2app=(iapfun)*(vu32*)(appxaddr+4);		//用户代码区第二个字为程序开始地址(复位地址)		
-		MSR_MSP(*(vu32*)appxaddr);					//初始化APP堆栈指针(用户代码区的第一个字用于存放栈顶地址)
+		MSR_MSP(*(vu32*)appxaddr);					//更改SP指针：初始化APP堆栈指针(用户代码区的第一个字用于存放栈顶地址)
 		jump2app();									//跳转到APP.
 	}
 }		 
 
+void ota_load_app(u32 app_addr)
+{
+	//判断栈顶是否合法
+	if (*(vu32 *)app_addr >  0x20000000)
+	{
+		//1、更改SP指针；
+		MSR_MSP(*(vu32 *)app_addr);
+		iap_load_deinit();
+		//2、更改PC指针；
+		ota_fun = (otafun)(*(vu32 *)(app_addr+4));
+		//3、跳转到APP；
+		ota_fun();
+	}
+}
 
+void iap_load_deinit(void)
+{
+	USART_DeInit(USART1);
+	GPIO_DeInit(GPIOA);
+	GPIO_DeInit(GPIOB);
+}
 
 
 

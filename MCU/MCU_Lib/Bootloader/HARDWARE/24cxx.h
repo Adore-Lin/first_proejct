@@ -24,15 +24,27 @@ void AT24CXX_Read(u16 ReadAddr,u8 *pBuffer,u16 NumToRead);   	//从指定地址�
 u8 AT24CXX_Check(void);  //检查器件
 void AT24CXX_Init(void); //初始化IIC
 
-/*OTA 升级标志位*/
 
-#define OTA_SUCCESS_FLAG        0x55AA55AA      //OTA升级完成的标志：升级完成后会将这个标志写入24C02, 用于判断是否需要升级
+
+
+
+
+/*OTA 升级标志位*/
+#define OTA_SUCCESS_FLAG    0x33AA55AA      //OTA升级完成的标志0x55AA55AA：升级完成后会将这个标志写入24C02, 用于判断是否需要升级
 #define OTA_CLEAR_FLAG      0x11111111    //清除OTA标志位
 
-typedef struct iap
+typedef struct
 {
 	u32 OTA_Flag;
+	u32 Filelen[11];
 } OTA_Struct;
+
+typedef struct 
+{
+	u8 Updata_buff[1024];
+	u32 W25QXX_Block_Num;//OTA事件默认是0， 其他程序可以根据需要修改这个值，来区分不同的OTA事件
+} Updata_Struct;
+
 	
 extern OTA_Struct OTA_Info;
 

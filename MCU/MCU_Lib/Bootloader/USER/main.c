@@ -47,7 +47,7 @@ void Usart_Circle_Buf_Test(void)
 		Usart_Printf("rx_data size: %d\r\n", len);
 		for(i = 0; i < len; i++)
 		{
-			Usart_Printf("rx_data:%c", rx_circle_buf.rx_data_out->start[i]);	
+			Usart_Printf("%c", rx_circle_buf.rx_data_out->start[i]);	
 		}
 
 		rx_circle_buf.rx_data_out++;
@@ -97,8 +97,6 @@ void Hardware_Init(void)
 int main(void)
 {	
 	//变量初始化
-	// u16 led0_pwm = 0;
-	// u8 dir = 1;
 	
 	//函数初始化
 	delay_init();
@@ -107,82 +105,17 @@ int main(void)
 	//驱动初始化
 	Hardware_Init();
 	Usart_Printf("IAP Test!\r\n");
-	// OTA_Write_Flag(OTA_CLEAR_FLAG);
+	OTA_Check_Flag();
+	// OTA_Write_Flag(OTA_SUCCESS_FLAG);
 	 
 	while(1)
 	{
 		// Usart_DMA_Test();
-		Usart_Circle_Buf_Test();
+		// Usart_Circle_Buf_Test();
 		// AT24CXX_Test();
 		// W25QXX_Test();
-		//OTA_Check_Flag();
-
-		#if 0
-		uint8_t key = 0;
-		key = KEY_Scan(0);
-
-		if (key == WKUP_PRES)
-		{
-			//检查是否有数据接收，如果有数据接收，则进行数据处理
-			if (usart_rx_flag == 1)
-			{
-				usart_rx_flag = 0;
-				Usart_Printf("IAP_Write_Start\r\n");
-				/* 判断是否为0X08XXXXXX */
-				if (((*(volatile uint32_t *)(0X20001000 + 4)) & 0xFF000000) == 0x08000000)
-				{
-					//将数据写入FALSH中
-					// iap_write_appbin(FLASH_APP1_ADDR, (u8 *)usart_rx_circle_buf.buf, usart_rx_len);
-					//将OTA升级完成的标志写入24C02
-					//OTA_Write_Flag(OTA_SUCCESS_FLAG);
-
-					Usart_DMA_Clear();
-					memset(usart_rx_buf, 0, sizeof(usart_rx_buf)); //清空接收缓冲区
-					Usart_Printf("IAP_Write_OK\r\n");
-				}
-				else
-				{
-					Usart_DMA_Clear();
-					memset(usart_rx_buf, 0, sizeof(usart_rx_buf)); //清空接收缓冲区
-					Usart_Printf("IAP_Write_Error\r\n");
-				}
-			}
-			else
-			{
-				Usart_Printf("No New Firmware!\r\n");
-			}
-		}
-
-		if (key == KEY1_PRES)
-		{
-			//Usart_Printf("IAP_Load_APP_OK: 跳转APP分区!\r\n");
-			// if (OTA_Read_Flag() == OTA_SUCCESS_FLAG)
-			// {
-			// 	/* 判断FLASH里面是否有APP,有的话执行 */
-			if (((*(volatile uint32_t *)(FLASH_APP1_ADDR + 4)) & 0xFF000000) == 0x08000000)
-			{
-				Usart_Printf("IAP_Load_APP_OK: 跳转APP分区!\r\n");
-				delay_ms(10);
-				//如果OTA升级标志位为OTA_SET_FLAG, 则进行跳转APP分区
-				iap_load_app(FLASH_APP1_ADDR);	
-			}
-			// }	
-		}
-		#endif
+		
 	}
 }
 
-// void OTA_Key_Check(void)
-// {
-// 	uint8_t key = 0;
-// 	key = KEY_Scan(0);
-// 	if (key == WKUP_PRES)
-// 	{
-// 		if (usart_send_flag == 1)
-// 		{
-// 			usart_send_flag = 0;
-// 			Usart_DMA_Send((u8 *)"OTA_Key_Check!\r\n", 16);
-// 		}
-// 	}
-// }
 

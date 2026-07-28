@@ -13,9 +13,7 @@ void iap_load_app(u32 appxaddr);			//执行flash里面的app程序
 // void iap_load_appsram(u32 appxaddr);		//执行sram里面的app程序
 void iap_write_appbin(u32 appxaddr,u8 *appbuf,u32 applen);	//在指定地址开始,写入bin
 
-
-/*自己添加的*/
-
+void iap_load_deinit(void);
 #endif
 
 
